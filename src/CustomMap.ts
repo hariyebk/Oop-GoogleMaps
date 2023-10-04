@@ -1,9 +1,10 @@
-interface Mappable {
-    name: string
+export interface Mappable {
     location: {
         lat: number,
         lng: number
     }
+    markerContent(): string
+    color : string
 }
 class CustomMap {
     private googleMap: google.maps.Map
@@ -25,7 +26,7 @@ class CustomMap {
         // pop up message
         marker.addListener("click", () => {
             const infoWindow = new google.maps.InfoWindow({
-                content: `Hey ${object.name} !`
+                content: object.markerContent()
             })
 
             infoWindow.open(this.googleMap, marker)
